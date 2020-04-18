@@ -5,9 +5,9 @@
 *
 * Description  : Code used to generate a permutation sequence for 1<= N <= 9 elements
 *                
-* Environment  : Laptop
+* Environment  : SBC
 *
-* Responsible  : Issac Jiménez
+* Responsible  : Issac Jimï¿½nez
 *****************************************************************************************************/
 
 #include <stdio.h>
