@@ -5,7 +5,7 @@
 *
 * Description  : Code used to generate a permutation sequence for 1<= N <= 9 elements
 *                
-* Environment  : SBC
+* Environment  : SBC.
 *
 * Responsible  : Issac Jim�nez
 *****************************************************************************************************/
