@@ -7,7 +7,7 @@
 *
 * Environment  : Laptop
 *
-* Responsible  : Issac Jiménez
+* Responsible  : Issac Jimï¿½nez
 *****************************************************************************************************/
 
 
@@ -19,11 +19,11 @@
 typedef struct stnode
 {
 	unsigned int u32element;
-	struct node *stNode_link;
+	struct NODE *stNode_link;
 }NODE;
 
 
-NODE* LIST_stNodCreate(NODE *, unsigned int);
+void LIST_stNodCreate(NODE **, unsigned int);
 
 void LIST_vAdd(NODE *, unsigned int, unsigned int);
 
@@ -59,7 +59,7 @@ void main(int argc, char *argv[])
 		case 1:
 				printf("\n Add element \n");
 				scanf("%d", &u32NewElement);
-				stNodFirst = LIST_stNodCreate(stNodFirst, u32NewElement);
+				LIST_stNodCreate(stNodFirst, u32NewElement);
 
 			break;
 
@@ -83,7 +83,7 @@ void main(int argc, char *argv[])
 		case 4:
 				if (LIST_bEmpty(stNodFirst) == 1)
 				{
-					printf("Vacia");
+					printf("Empty");
 				}
 			
 				else
@@ -101,7 +101,7 @@ void main(int argc, char *argv[])
 }
 
 
-NODE* LIST_stNodCreate(NODE *stNode, unsigned int u32element)
+void LIST_stNodCreate(NODE **stNode, unsigned int u32element)
 {
 	NODE *stNodeNew;
 
@@ -110,15 +110,13 @@ NODE* LIST_stNodCreate(NODE *stNode, unsigned int u32element)
 	if (stNodeNew != NULL)
 	{
 		stNodeNew->u32element = u32element;            
-		stNodeNew->stNode_link = stNode;/*Move node*/
-		stNode = stNodeNew;
+		stNodeNew->stNode_link = *stNode;/*Move node*/
+		*stNode = stNodeNew; /*Insert as FILO*/
 	}
 
 	else {
 		printf("\n  failure of allocation.");
 	}
-
-	return stNodeNew;
 }
 
 void LIST_vAdd(NODE *stNode, unsigned int u32number, unsigned int u32NumberBefor)
