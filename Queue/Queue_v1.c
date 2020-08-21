@@ -1,51 +1,54 @@
+﻿/***************************************************************************
+*=====================      Copyright by Don Issac      ===============
+****************************************************************************
+* Title        : Queue
+*
+* Description  : Code used to create a queue
+*
+* Environment  : Laptop
+*
+* Responsible  : Issac Jim�nez
+*****************************************************************************************************/
+
 #include <stdio.h>
 #include <stdlib.h>
 
+#define TAM      10
+
 typedef struct element
 {
-	int value;
-	struct element *next;
+	unsigned int u32value;
+	struct element *ptstnext;
 }element;
 
 typedef element *ptrElement;
 
 
 void QUEUE_vstNodCreate(ptrElement *, ptrElement *, int);
-void QUEUE_vprint(ptrElement ,char);
-void QUEUE_vfree(ptrElement ptstNodeHead);
+void QUEUE_vprint(ptrElement);
 
 
 int main(void)
 {
 	element *ptstNodFirst =  NULL;
 	element *ptstNodLast = NULL;
-	int num = 2, i;
-	char *strin = "123A";
-	int result;
+	unsigned char u8Count;
+	unsigned int au32values[TAM] = { 2, 4, 5, 6, 7, 8, 9, 1, 3, 0 };
 
-	int values[10] = { 2, 4, 5, 6, 7, 8, 9, 1, 3, 0 };
-	/* your code */
-	//stNodFirst = QUEUE_stFirstNodCreate(values[0]);
+	printf("\n Creation of a queue \n\n");
 
-	for (i = 0; i<10;i++)
+	for (u8Count = 0; u8Count<10; u8Count++)
 	{
-		QUEUE_vstNodCreate(&ptstNodFirst, &ptstNodLast, values[i]);
+		QUEUE_vstNodCreate(&ptstNodFirst, &ptstNodLast, au32values[u8Count]);
 		
 	}
 	
-	QUEUE_vprint(ptstNodFirst, 5);
-
-	QUEUE_vprint(ptstNodFirst, 7);
+	QUEUE_vprint(ptstNodFirst);
 
 
 	free(ptstNodFirst);
 	free(ptstNodLast);
 
-	//QUEUE_vfree(ptstNodLast);
-
-	result = atoi(strin);
-
-	printf("\n %d\n", result);
 
 	getch();
 	return 0;
@@ -60,8 +63,8 @@ void QUEUE_vstNodCreate(ptrElement *ptstNodeHead, ptrElement *ptstNodeEnd, int v
 
 	if (ptstNodeNew != NULL)
 	{
-		ptstNodeNew->value = value;
-		ptstNodeNew->next = NULL;
+		ptstNodeNew->u32value = value;
+		ptstNodeNew->ptstnext = NULL;
 
 		if (NULL == *ptstNodeHead)
 		{
@@ -69,7 +72,7 @@ void QUEUE_vstNodCreate(ptrElement *ptstNodeHead, ptrElement *ptstNodeEnd, int v
 		}
 
 		else {
-			(*ptstNodeEnd)->next = ptstNodeNew;/*Move node*/
+			(*ptstNodeEnd)->ptstnext = ptstNodeNew;/*Move node*/
 		}
 		
 		*ptstNodeEnd = ptstNodeNew;/*Move node*/
@@ -83,39 +86,18 @@ void QUEUE_vstNodCreate(ptrElement *ptstNodeHead, ptrElement *ptstNodeEnd, int v
 
 
 
-void QUEUE_vprint(ptrElement ptstNodeHead, char u8limit)
+void QUEUE_vprint(ptrElement ptstNodeHead)
 {
-	char count;
+	unsigned char u8count;
 	if (NULL == ptstNodeHead)
 	{
 		printf("\n Queue is empty \n");
 	}
 	else {
-		for (count = 0; count <u8limit; count++)
+		for (u8count = 0; u8count < TAM; u8count++)
 		{
-			printf("\n --{%d, node direction %d}", ptstNodeHead->value, ptstNodeHead);
-			ptstNodeHead = ptstNodeHead->next;
+			printf("\n --{%d, node direction %d}", ptstNodeHead->u32value, ptstNodeHead);
+			ptstNodeHead = ptstNodeHead->ptstnext;
 		}
-	}
-}
-
-void QUEUE_vfree(ptrElement ptstNodelast)
-{
-	//char count;
-	ptrElement ptsTemp = NULL;
-
-	printf("\n %d\n",sizeof(ptstNodelast));
-
-	if (NULL == ptstNodelast)
-	{
-		printf("\n Queue is empty \n");
-	}
-	else {
-		/*while (NULL != ptstNodeHead)
-		{
-			printf("\n --{%d, node direction %d}", ptstNodeHead->value, ptstNodeHead);
-			ptsTemp = ptstNodeHead->next;
-			free(ptstNodeHead);
-		}*/
 	}
 }
